@@ -1,1 +1,1 @@
-export {default as BtnCounter} from './components/BtnCounter.vue';
+export {default as FQRenderer} from './components/FQRenderer.vue';
