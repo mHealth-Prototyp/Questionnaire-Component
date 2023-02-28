@@ -157,4 +157,4 @@ function formatDateTime(timestamp: number) {
   return date.formatDate(timestamp, 'YYYY-MM-DDTHH:mm:ssZ');
 }
 </script>
-<style scoped></style>
+<style scoped type="text/css"></style>

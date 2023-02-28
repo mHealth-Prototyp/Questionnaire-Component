@@ -46,4 +46,4 @@ function updateModel(value: string | number | null) {
   }
 }
 </script>
-<style scoped></style>
+<style scoped type="text/css"></style>

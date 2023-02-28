@@ -27,4 +27,4 @@ defineEmits<{
     </QCardActions>
   </QCard>
 </template>
-<style scoped></style>
+<style scoped type="text/css"></style>

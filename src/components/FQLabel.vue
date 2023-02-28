@@ -32,7 +32,7 @@ const help = ref(props.question.subItems?.filter((x) => x.options?.controlTypes?
     </label>
   </QCardSection>
 </template>
-<style scoped>
+<style scoped type="text/css">
 .fq-flex-container {
   display: flex;
 }

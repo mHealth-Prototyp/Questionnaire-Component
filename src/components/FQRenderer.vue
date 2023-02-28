@@ -119,7 +119,7 @@ function next() {
     {{ 'unsupported' }}
   </template>
 </template>
-<style scoped>
+<style scoped type="text/css">
 #fq-mobile-bottom {
   background-color: #fff;
   padding: 15px;

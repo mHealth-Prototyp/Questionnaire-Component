@@ -31,3 +31,4 @@ function updateModel(value: boolean | undefined) {
     :disable="question.readOnly"
     @update:model-value="updateModel" />
 </template>
+<style scoped type="text/css"></style>

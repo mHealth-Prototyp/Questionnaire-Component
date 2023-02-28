@@ -94,7 +94,7 @@ function shouldBeRendered(question: IQuestion) {
   }
 }
 </script>
-<style scoped>
+<style scoped type="text/css">
 .fq-error {
   border-color: red;
 }

@@ -130,7 +130,7 @@ function getValue(answerOption?: IAnswerOption) {
     </QSelect>
   </template>
 </template>
-<style scoped>
+<style scoped type="text/css">
 .fq-help {
   color: rgba(0, 0, 0, 0.54);
   width: 40px;

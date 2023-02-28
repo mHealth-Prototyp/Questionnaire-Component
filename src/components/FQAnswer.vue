@@ -39,3 +39,4 @@ defineProps<FQAnswerProps>();
     <!-- other controls can be added here -->
   </QCardSection>
 </template>
+<style scoped type="text/css"></style>
