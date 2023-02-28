@@ -16,7 +16,7 @@ export type FQAnswerProps = {
 defineProps<FQAnswerProps>();
 </script>
 <template>
-  <QCardSection class="q-pb-none">
+  <QCardSection class="q-pb-none fq-answer-options">
     <template v-if="question.type === QuestionnaireItemType.CHOICE">
       <FQChoice :question="question" />
     </template>

@@ -18,10 +18,10 @@ const help = ref(props.question.subItems?.filter((x) => x.options?.controlTypes?
   <QCardSection class="text-body2 text-weight-medium text-justify q-pb-none fq-flex-container">
     <QIcon
       v-if="help"
-      class="q-mr-sm cursor-pointer"
+      class="q-mr-sm cursor-pointer fq-help"
       name="fa-solid fa-circle-question"
       size="xs">
-      <QTooltip class="text-body2">
+      <QTooltip class="text-body2 fq-help-text">
         {{ help?.label[language] }}
       </QTooltip>
     </QIcon>

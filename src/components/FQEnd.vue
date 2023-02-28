@@ -8,11 +8,13 @@ defineEmits<{
 </script>
 <template>
   <QCard
-    class="fq-item"
+    class="fq-actions"
     flat
     bordered>
-    <QCardSection class="text-body2 text-weight-medium text-center q-pb-none"> {{ 'TODO: end-text' }} </QCardSection>
-    <QCardActions :align="'between'">
+    <QCardSection class="text-body2 text-weight-medium text-center q-pb-none fq-end-text"> {{ 'TODO: end-text' }} </QCardSection>
+    <QCardActions
+      class="fq-buttons"
+      :align="'between'">
       <QBtn
         flat
         color="primary"
@@ -27,4 +29,3 @@ defineEmits<{
     </QCardActions>
   </QCard>
 </template>
-<style scoped type="text/css"></style>

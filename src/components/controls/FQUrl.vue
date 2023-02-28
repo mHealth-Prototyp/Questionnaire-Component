@@ -2,7 +2,7 @@
   <QInput
     :id="question.id"
     :model-value="question.selectedAnswers.at(0)?.valueUri ?? ''"
-    class="fq-text"
+    class="fq-url"
     :for="question.id"
     type="url"
     outlined
@@ -46,4 +46,3 @@ function updateModel(value: string | number | null) {
   }
 }
 </script>
-<style scoped type="text/css"></style>

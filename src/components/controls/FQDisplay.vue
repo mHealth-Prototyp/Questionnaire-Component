@@ -17,4 +17,3 @@ const {language} = useFQInject();
     </label>
   </QCardSection>
 </template>
-<style scoped type="text/css"></style>

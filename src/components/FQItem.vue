@@ -1,22 +1,9 @@
 <template>
-  <template v-if="question.type === QuestionnaireItemType.GROUP">
-    <template v-if="alreadyInCard">
-      <FQLabel :question="question" />
-      <template v-if="question.subItems">
-        <FQItem
-          v-for="subItem of question.subItems.filter((q) => shouldBeRendered(q))"
-          :key="subItem.id"
-          :question="subItem"
-          already-in-card>
-        </FQItem>
-      </template>
-    </template>
-    <template v-else>
-      <QCard
-        class="q-pb-md fq-item"
-        :class="{'fq-error': question.isInvalid || question.subItems?.filter((q) => shouldBeRendered(q)).find((q) => q.isInvalid)?.isInvalid}"
-        flat
-        bordered>
+  <div
+    :id="'fq-item-' + question.id"
+    :class="'fq-item-' + question.type">
+    <template v-if="question.type === QuestionnaireItemType.GROUP">
+      <template v-if="alreadyInCard">
         <FQLabel :question="question" />
         <template v-if="question.subItems">
           <FQItem
@@ -26,44 +13,61 @@
             already-in-card>
           </FQItem>
         </template>
-      </QCard>
+      </template>
+      <template v-else>
+        <QCard
+          class="q-pb-md fq-item"
+          :class="{'fq-error': checkInvalidity(question)}"
+          flat
+          bordered>
+          <FQLabel :question="question" />
+          <template v-if="question.subItems">
+            <FQItem
+              v-for="subItem of question.subItems.filter((q) => shouldBeRendered(q))"
+              :key="subItem.id"
+              :question="subItem"
+              already-in-card>
+            </FQItem>
+          </template>
+        </QCard>
+      </template>
     </template>
-  </template>
-  <template v-else-if="question.type === QuestionnaireItemType.DISPLAY">
-    <QCard
-      class="fq-item"
-      flat
-      bordered>
-      <FQDisplay :question="question" />
-    </QCard>
-  </template>
-  <template v-else>
-    <template v-if="alreadyInCard">
-      <FQLabel :question="question" />
-      <FQAnswer
-        :key="question.id"
-        :question="question" />
-    </template>
-    <template v-else>
+    <template v-else-if="question.type === QuestionnaireItemType.DISPLAY">
       <QCard
-        class="q-pb-md fq-item"
-        :class="{'fq-error': question.isInvalid}"
+        class="fq-item"
         flat
         bordered>
+        <FQDisplay :question="question" />
+      </QCard>
+    </template>
+    <template v-else>
+      <template v-if="alreadyInCard">
         <FQLabel :question="question" />
         <FQAnswer
           :key="question.id"
           :question="question" />
-      </QCard>
+      </template>
+      <template v-else>
+        <QCard
+          class="q-pb-md fq-item"
+          :class="{'fq-error': question.isInvalid}"
+          flat
+          bordered>
+          <FQLabel :question="question" />
+          <FQAnswer
+            :key="question.id"
+            :question="question" />
+        </QCard>
+      </template>
+      <template v-if="question.subItems">
+        <FQItem
+          v-for="subItem of question.subItems.filter((q) => shouldBeRendered(q))"
+          :key="subItem.id"
+          :question="subItem"
+          :already-in-card="alreadyInCard" />
+      </template>
     </template>
-    <template v-if="question.subItems">
-      <FQItem
-        v-for="subItem of question.subItems.filter((q) => shouldBeRendered(q))"
-        :key="subItem.id"
-        :question="subItem"
-        :already-in-card="alreadyInCard" />
-    </template>
-  </template>
+  </div>
 </template>
 <script setup lang="ts">
 import {QCard} from 'quasar';
@@ -92,6 +96,17 @@ function shouldBeRendered(question: IQuestion) {
   } else {
     return false;
   }
+}
+
+function checkInvalidity(question: IQuestion) {
+  if (question.isInvalid) {
+    return true;
+  } else if (question.subItems === undefined || question.subItems?.length === 0) {
+    return false;
+  }
+  let isInvalid = false;
+  question.subItems?.filter((q) => shouldBeRendered(q)).forEach((q) => (isInvalid = isInvalid || checkInvalidity(q)));
+  return isInvalid;
 }
 </script>
 <style scoped type="text/css">

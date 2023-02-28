@@ -1,17 +1,15 @@
 <script setup lang="ts">
 import type {IAnswerOption, IQuestion} from '@i4mi/fhir_questionnaire';
 import {ItemControlType} from '@i4mi/fhir_questionnaire';
-import {QCheckbox, QIcon, QRadio, QSelect, QTooltip} from 'quasar';
-import {ref} from 'vue';
+import {QCheckbox, QRadio, QSelect} from 'quasar';
 import {useFQInject} from '../FQComposables';
 
 export type FQChoiceProps = {
   question: IQuestion;
 };
 
-const props = defineProps<FQChoiceProps>();
+defineProps<FQChoiceProps>();
 const {language, onAnswer, isSelected} = useFQInject();
-const help = ref(props.question.subItems?.filter((x) => x.options?.controlTypes?.find((y) => y === ItemControlType.HELP_BUTTON))?.at(0));
 
 function getValue(answerOption?: IAnswerOption) {
   if (!answerOption) return '';
@@ -27,17 +25,6 @@ function getValue(answerOption?: IAnswerOption) {
 <template>
   <!-- CHECKBOXES -->
   <template v-if="question.options?.controlTypes?.find((x) => x === ItemControlType.CHECK_BOX)">
-    <template v-if="help">
-      <div class="fq-help">
-        <QIcon
-          name="fa-solid fa-circle-question"
-          size="xs">
-          <QTooltip>
-            {{ help.label[language] }}
-          </QTooltip>
-        </QIcon>
-      </div>
-    </template>
     <div
       v-for="(answer, i) in question.answerOptions"
       :key="question.id + '-' + i">
@@ -50,17 +37,6 @@ function getValue(answerOption?: IAnswerOption) {
   </template>
   <!-- RADIOS -->
   <template v-else-if="question.options?.controlTypes?.find((x) => x === ItemControlType.RADIO_BUTTON)">
-    <template v-if="help">
-      <div class="fq-help">
-        <QIcon
-          name="fa-solid fa-circle-question"
-          size="xs">
-          <QTooltip>
-            {{ help.label[language] }}
-          </QTooltip>
-        </QIcon>
-      </div>
-    </template>
     <div
       v-for="(answer, i) in question.answerOptions"
       :key="question.id + '-' + i">
@@ -88,20 +64,7 @@ function getValue(answerOption?: IAnswerOption) {
       outlined
       dense
       @add="(details) => onAnswer(question, details.value.answer)"
-      @remove="(details) => onAnswer(question, details.value.answer)">
-      <template
-        v-if="help"
-        #prepend>
-        <QIcon
-          class="cursor-pointer"
-          name="fa-solid fa-circle-question"
-          size="xs">
-          <q-tooltip>
-            {{ help?.label[language] }}
-          </q-tooltip>
-        </QIcon>
-      </template>
-    </QSelect>
+      @remove="(details) => onAnswer(question, details.value.answer)" />
     <QSelect
       v-else
       class="fq-choice fq-dropdown"
@@ -114,29 +77,6 @@ function getValue(answerOption?: IAnswerOption) {
       map-options
       outlined
       dense
-      @update:model-value="(value) => onAnswer(question, value.answer)">
-      <template
-        v-if="help"
-        #prepend>
-        <QIcon
-          class="cursor-pointer"
-          name="fa-solid fa-circle-question"
-          size="xs">
-          <QTooltip>
-            {{ help?.label[language] }}
-          </QTooltip>
-        </QIcon>
-      </template>
-    </QSelect>
+      @update:model-value="(value) => onAnswer(question, value.answer)" />
   </template>
 </template>
-<style scoped type="text/css">
-.fq-help {
-  color: rgba(0, 0, 0, 0.54);
-  width: 40px;
-  height: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-</style>

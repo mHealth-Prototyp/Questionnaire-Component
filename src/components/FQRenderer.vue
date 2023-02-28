@@ -47,7 +47,7 @@ function next() {
   <template v-if="$q.platform.is.desktop">
     <div class="fq-desktop">
       <QCard
-        class="fq-item"
+        class="fq-intro"
         flat
         bordered>
         <QCardSection class="text-body2 text-weight-medium text-center q-pb-none">
@@ -71,7 +71,7 @@ function next() {
       <div id="fq-mobile-content">
         <QCard
           v-if="index === -1"
-          class="fq-item"
+          class="fq-intro"
           flat
           bordered>
           <QCardSection class="text-body2 text-weight-medium text-center q-pb-none">

@@ -2,7 +2,7 @@
   <QInput
     :id="question.id"
     :model-value="format(getAnswerTimestamp(question.selectedAnswers.at(0)))"
-    class="fq-time"
+    class="fq-date-time"
     :for="question.id"
     outlined
     dense
@@ -157,4 +157,3 @@ function formatDateTime(timestamp: number) {
   return date.formatDate(timestamp, 'YYYY-MM-DDTHH:mm:ssZ');
 }
 </script>
-<style scoped type="text/css"></style>

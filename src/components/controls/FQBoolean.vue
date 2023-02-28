@@ -23,6 +23,7 @@ function updateModel(value: boolean | undefined) {
 </script>
 <template>
   <QToggle
+    class="fq-boolean"
     :model-value="question.selectedAnswers.at(0)?.valueBoolean"
     indeterminate-icon="fa-solid fa-question"
     checked-icon="fa-solid fa-check"
