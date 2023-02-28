@@ -6,12 +6,12 @@ import {FQProvidedKey} from './FQKeys';
 import FQItem from './FQItem.vue';
 import VueMarkdown from 'vue-markdown-render';
 import FQEnd from './FQEnd.vue';
-import type {TranslationStrings} from './FQTypes';
+import type {FQTranslationStrings} from './FQTypes';
 
 export type FQRendererProps = {
   questionnaireData: QuestionnaireData;
   language: string;
-  translationStrings: TranslationStrings;
+  translationStrings: FQTranslationStrings;
 };
 
 const props = defineProps<FQRendererProps>();
