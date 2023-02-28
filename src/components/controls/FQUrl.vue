@@ -9,7 +9,6 @@
     dense
     :readonly="question.readOnly"
     :label="prompt?.label[language]"
-    :suffix="unit?.label[language]"
     :rule="[(value: string) => regex.test(value) || 'errorMessage']"
     @update:model-value="updateModel" />
 </template>
@@ -28,7 +27,6 @@ const props = defineProps<FQUrlProps>();
 const {language, onAnswer} = useFQInject();
 
 const prompt = ref(props.question.subItems?.filter((x) => x.options?.controlTypes?.find((y) => y === ItemControlType.PROMPT))?.at(0));
-const unit = ref(props.question.subItems?.filter((x) => x.options?.controlTypes?.find((y) => y === ItemControlType.UNIT))?.at(0));
 
 const regex = /^(https:|http:|www\.)\S*/gm;
 

@@ -6,11 +6,14 @@ import {FQProvidedKey} from './FQKeys';
 import FQItem from './FQItem.vue';
 import VueMarkdown from 'vue-markdown-render';
 import FQEnd from './FQEnd.vue';
+import type {TranslationStrings} from './FQTypes';
 
 export type FQRendererProps = {
   questionnaireData: QuestionnaireData;
   language: string;
+  translationStrings: TranslationStrings;
 };
+
 const props = defineProps<FQRendererProps>();
 const emits = defineEmits<{
   (e: 'reset'): void;
@@ -23,7 +26,8 @@ const progress = computed(() => (index.value + 1) / (props.questionnaireData.get
 provide(FQProvidedKey, {
   language: props.language,
   onAnswer: props.questionnaireData.updateQuestionAnswers.bind(props.questionnaireData),
-  isSelected: props.questionnaireData.isAnswerOptionSelected.bind(props.questionnaireData)
+  isSelected: props.questionnaireData.isAnswerOptionSelected.bind(props.questionnaireData),
+  translationStrings: props.translationStrings
 });
 
 function reset() {

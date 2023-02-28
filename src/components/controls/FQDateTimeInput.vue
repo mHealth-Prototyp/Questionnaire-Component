@@ -4,6 +4,7 @@
     :model-value="format(getAnswerTimestamp(question.selectedAnswers.at(0)))"
     class="fq-date-time"
     :for="question.id"
+    :label="prompt?.label[language]"
     outlined
     dense
     readonly>
@@ -24,7 +25,7 @@
             <div class="row items-center justify-end">
               <QBtn
                 v-close-popup
-                label="TODO: close"
+                :label="translationStrings.close"
                 color="primary"
                 flat />
             </div>
@@ -52,7 +53,7 @@
             <div class="row items-center justify-end">
               <QBtn
                 v-close-popup
-                label="TODO: close"
+                :label="translationStrings.close"
                 color="primary"
                 flat />
             </div>
@@ -63,10 +64,11 @@
   </QInput>
 </template>
 <script setup lang="ts">
-import type {IAnswerOption, IQuestion} from '@i4mi/fhir_questionnaire';
+import {ItemControlType, type IAnswerOption, type IQuestion} from '@i4mi/fhir_questionnaire';
 import type {QuestionnaireResponseItemAnswer} from '@i4mi/fhir_r4';
 import {QuestionnaireItemType} from '@i4mi/fhir_r4';
 import {date, QBtn, QDate, QIcon, QInput, QPopupProxy, QTime} from 'quasar';
+import {ref} from 'vue';
 import {useFQInject} from '../FQComposables';
 
 export type FQDateTimeInputProps = {
@@ -74,7 +76,9 @@ export type FQDateTimeInputProps = {
 };
 
 const props = defineProps<FQDateTimeInputProps>();
-const {language, onAnswer} = useFQInject();
+const {language, onAnswer, translationStrings} = useFQInject();
+
+const prompt = ref(props.question.subItems?.filter((x) => x.options?.controlTypes?.find((y) => y === ItemControlType.PROMPT))?.at(0));
 
 function updateModel(value: string | null) {
   if (typeof value === 'string') {
