@@ -14,7 +14,6 @@ onUpdated(() => {
   setInitialValue();
 });
 
-
 function setInitialValue() {
   if (props.question.selectedAnswers.length === 0) {
     if (props.question.initial && props.question.initial.length > 0) {
