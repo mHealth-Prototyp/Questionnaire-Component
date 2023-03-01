@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import type {IAnswerOption, IQuestion} from '@i4mi/fhir_questionnaire';
 import {QToggle} from 'quasar';
+import {onUpdated} from 'vue';
 import {useFQInject} from '../FQComposables';
 export type FQBooleanProps = {
   question: IQuestion;
@@ -8,10 +9,17 @@ export type FQBooleanProps = {
 
 const props = defineProps<FQBooleanProps>();
 const {language, onAnswer} = useFQInject();
+setInitialValue();
+onUpdated(() => {
+  setInitialValue();
+});
 
-if (props.question.selectedAnswers.length === 0) {
-  if (props.question.initial && props.question.initial.length > 0) {
-    updateModel(props.question.initial.at(0)?.valueBoolean);
+
+function setInitialValue() {
+  if (props.question.selectedAnswers.length === 0) {
+    if (props.question.initial && props.question.initial.length > 0) {
+      updateModel(props.question.initial.at(0)?.valueBoolean);
+    }
   }
 }
 
