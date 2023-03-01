@@ -1,6 +1,6 @@
 {
   "name": "@i4mi/fhir-questionnaire-renderer",
-  "version": "0.0.1-beta.14",
+  "version": "0.0.1-beta.15",
   "type": "module",
   "main": "./dist/fhir-questionnaire-renderer.umd.cjs",
   "module": "./dist/fhir-questionnaire-renderer.js",

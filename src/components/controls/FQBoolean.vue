@@ -9,6 +9,12 @@ export type FQBooleanProps = {
 const props = defineProps<FQBooleanProps>();
 const {language, onAnswer} = useFQInject();
 
+if (props.question.selectedAnswers.length === 0) {
+  if (props.question.initial && props.question.initial.length > 0) {
+    updateModel(props.question.initial.at(0)?.valueBoolean);
+  }
+}
+
 function updateModel(value: boolean | undefined) {
   if (value !== undefined) {
     const answer: IAnswerOption = {
