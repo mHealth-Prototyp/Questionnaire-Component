@@ -32,6 +32,7 @@ function getValue(answerOption?: IAnswerOption) {
         class="fq-choice fq-checkbox"
         :model-value="isSelected(question, answer)"
         :label="answer.answer[language]"
+        :disable="question.readOnly"
         @click="onAnswer(question, answer)" />
     </div>
   </template>
@@ -45,6 +46,7 @@ function getValue(answerOption?: IAnswerOption) {
         :model-value="isSelected(question, answer) ? getValue(answer) : ''"
         :val="getValue(answer)"
         :label="answer.answer[language]"
+        :disable="question.readOnly"
         @click="onAnswer(question, answer)" />
     </div>
   </template>
@@ -63,6 +65,7 @@ function getValue(answerOption?: IAnswerOption) {
       map-options
       outlined
       dense
+      :readonly="question.readOnly"
       @add="(details) => onAnswer(question, details.value.answer)"
       @remove="(details) => onAnswer(question, details.value.answer)" />
     <QSelect
@@ -77,6 +80,7 @@ function getValue(answerOption?: IAnswerOption) {
       map-options
       outlined
       dense
+      :readonly="question.readOnly"
       @update:model-value="(value) => onAnswer(question, value.answer)" />
   </template>
 </template>
