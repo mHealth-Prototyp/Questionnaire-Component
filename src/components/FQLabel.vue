@@ -27,6 +27,7 @@ const help = ref(props.question.subItems?.filter((x) => x.options?.controlTypes?
     </QIcon>
     <label
       class="fq-label"
+      :class="{'fq-error-label': question.isInvalid}"
       :for="question.id">
       {{ (question.prefix ? question.prefix + ': ' : '') + question.label[language] + (question.required ? ' *' : '') }}
     </label>
@@ -35,5 +36,9 @@ const help = ref(props.question.subItems?.filter((x) => x.options?.controlTypes?
 <style scoped type="text/css">
 .fq-flex-container {
   display: flex;
+}
+
+.fq-error-label {
+  color: red;
 }
 </style>
