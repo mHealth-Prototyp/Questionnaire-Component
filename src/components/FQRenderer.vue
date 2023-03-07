@@ -12,6 +12,7 @@ export type FQRendererProps = {
   questionnaireData: QuestionnaireData;
   language: string;
   translationStrings: FQTranslationStrings;
+  disableSave: boolean;
 };
 
 const props = defineProps<FQRendererProps>();
@@ -66,6 +67,7 @@ function next() {
         :key="question.id"
         :question="question" />
       <FQEnd
+        :disable-save="disableSave"
         @reset="reset"
         @save="save" />
     </div>
@@ -90,6 +92,7 @@ function next() {
           :question="questionnaireData.getQuestions()[index]" />
         <FQEnd
           v-if="index === questionnaireData.getQuestions().length"
+          :disable-save="disableSave"
           @reset="reset"
           @save="save" />
 

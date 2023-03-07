@@ -111,6 +111,6 @@ function checkInvalidity(question: IQuestion) {
 </script>
 <style scoped type="text/css">
 .fq-error {
-  border-color: red;
+  border-color: #d01e06;
 }
 </style>

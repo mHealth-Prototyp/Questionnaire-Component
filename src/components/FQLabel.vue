@@ -39,6 +39,6 @@ const help = ref(props.question.subItems?.filter((x) => x.options?.controlTypes?
 }
 
 .fq-error-label {
-  color: red;
+  color: #d01e06;
 }
 </style>

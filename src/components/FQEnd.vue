@@ -2,6 +2,11 @@
 import {QBtn, QCardActions, QCardSection, QCard} from 'quasar';
 import {useFQInject} from './FQComposables';
 
+export type FQEndProps = {
+  disableSave: boolean;
+};
+
+defineProps<FQEndProps>();
 defineEmits<{
   (e: 'reset'): void;
   (e: 'save', mobile: boolean): void;
@@ -26,6 +31,7 @@ const {translationStrings} = useFQInject();
       </QBtn>
       <QBtn
         color="primary"
+        :disable="disableSave"
         @click="$emit('save', $q.platform.is.mobile)">
         {{ translationStrings.save }}
       </QBtn>
