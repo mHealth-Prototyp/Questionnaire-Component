@@ -37,9 +37,7 @@ function reset() {
 }
 
 function save(mobile: boolean) {
-  if (props.questionnaireData.isResponseComplete(true, true)) {
-    emits('save', mobile);
-  }
+  emits('save', mobile);
 }
 
 function next() {
