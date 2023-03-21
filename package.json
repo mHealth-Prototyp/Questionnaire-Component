@@ -1,6 +1,6 @@
 {
   "name": "@i4mi/fhir-questionnaire-renderer",
-  "version": "0.0.1-beta.20",
+  "version": "1.0.0",
   "type": "module",
   "main": "./dist/fhir-questionnaire-renderer.umd.cjs",
   "module": "./dist/fhir-questionnaire-renderer.js",
@@ -25,7 +25,7 @@
     "prepare": "husky install"
   },
   "peerDependencies": {
-    "@i4mi/fhir_questionnaire": "^0.2.0-beta.4",
+    "@i4mi/fhir_questionnaire": "^0.2.0-beta.9",
     "@i4mi/fhir_r4": "^2.1.2",
     "quasar": "^2.11.6",
     "vue": "^3.2.47"
