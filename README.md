@@ -1,46 +1,83 @@
-# fhir-questionnaire-renderer
+# I4MI FHIR-Questionnaire Renderer
 
-This template should help get you started developing with Vue 3 in Vite.
+This package provides a Quasar component that renders a FHIR-Questionnaire.
 
-## Recommended IDE Setup
+## Basic use
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+### Install
 
-## Type Support for `.vue` Imports in TS
+Before you can use this package in your Quasar project, you need to install it, using npm. Point your terminal to the root directory of your Quasar project (where also package.json is located) and enter the following command:
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin) to make the TypeScript language service aware of `.vue` types.
-
-If the standalone TypeScript plugin doesn't feel fast enough to you, Volar has also implemented a [Take Over Mode](https://github.com/johnsoncodehk/volar/discussions/471#discussioncomment-1361669) that is more performant. You can enable it by the following steps:
-
-1. Disable the built-in TypeScript Extension
-    1) Run `Extensions: Show Built-in Extensions` from VSCode's command palette
-    2) Find `TypeScript and JavaScript Language Features`, right click and select `Disable (Workspace)`
-2. Reload the VSCode window by running `Developer: Reload Window` from the command palette.
-
-## Customize configuration
-
-See [Vite Configuration Reference](https://vitejs.dev/config/).
-
-## Project Setup
-
-```sh
-npm install
+```bash
+npm install @i4mi/fhir-questionnaire-renderer
 ```
 
-### Compile and Hot-Reload for Development
+You also need the following packages in your project (see `peerDependecies` in `package.json` for the version):
 
-```sh
-npm run dev
+- `@i4mi/fhir_questionnaire`
+- `@i4mi/fhir_r4`
+- `quasar`
+- `vue`
+
+After the installation completed, you will be able to use the `FQRenderer` component.
+
+### Setup
+
+Here is a basic exemple with a FHIR-Questionnaire only in english. To see how to save and reset the QuestionnaireData see the [documentation](https://www.npmjs.com/package/@i4mi/fhir_questionnaire) from the `@i4mi/fhir_questionnaire` package.
+
+```html
+<script
+  setup
+  lang="ts">
+  import {ref} from 'vue';
+  import {Questionnaire} from '@i4mi/fhir_r4';
+  import {QuestionnaireData} from '@i4mi/fhir_questionnaire';
+  import {FQRenderer} from '@i4mi/fhir-questionnaire-renderer';
+
+  const fhirQuestionnaire: Questionnaire = {
+    /* some FHIR-Questionnaire */
+  };
+  // IMPORTANT!!! The QuestionnaireData should be wrapped in a ref.
+  const questionnaireData = ref(new QuestionnaireData(fhirQuestionnaire, ['en']));
+
+  function save() {
+    // SEE to @i4mi/fhir_questionnaire documentation.
+  }
+
+  function reset() {
+    // SEE to @i4mi/fhir_questionnaire documentation.
+  }
+</script>
+<template>
+  <FQRenderer
+    :questionnaire-data="questionnaireData"
+    language="en"
+    :translation-strings="{/* TranslationStrings object */}"
+    @save="save"
+    @reset="reset" />
+</template>
 ```
 
-### Type-Check, Compile and Minify for Production
+For a complete example within a Quasar project, see TODO: prototype 4 GitHub.
 
-```sh
-npm run build
-```
+## Features
+There is only a partial support for the question type to render, and also for the Help Button, Prompt and Unit DISPLAYs from the [questionnaire-item-control](https://www.hl7.org/fhir/valueset-questionnaire-item-control.html) value-set. Check-box and radio-button are also supported for the question with the CHOICE type and the corresponding extension.
 
-### Lint with [ESLint](https://eslint.org/)
-
-```sh
-npm run lint
-```
+| Type        | Can be rendered    | Help Button        | Prompt             | Unit               |
+| ----------- | ------------------ | ------------------ | ------------------ | ------------------ |
+| GROUP       | 🟩 supported       | 🟩 supported       | ⬜️ not applicable | ⬜️ not applicable |
+| DISPLAY     | 🟩 supported       | 🟩 supported       | ⬜️ not applicable | ⬜️ not applicable |
+| BOOLEAN     | 🟩 supported       | 🟩 supported       | ⬜️ not applicable | ⬜️ not applicable |
+| DECIMAL     | 🟩 supported       | 🟩 supported       | 🟩 supported       | 🟩 supported       |
+| INTEGER     | 🟩 supported       | 🟩 supported       | 🟩 supported       | 🟩 supported       |
+| DATE        | 🟩 supported       | 🟩 supported       | 🟩 supported       | ⬜️ not applicable |
+| DATETIME    | 🟩 supported       | 🟩 supported       | 🟩 supported       | ⬜️ not applicable |
+| TIME        | 🟩 supported       | 🟩 supported       | 🟩 supported       | ⬜️ not applicable |
+| STRING      | 🟩 supported       | 🟩 supported       | 🟩 supported       | 🟩 supported       |
+| TEXT        | 🟩 supported       | 🟩 supported       | 🟩 supported       | 🟩 supported       |
+| URL         | 🟩 supported       | 🟩 supported       | 🟩 supported       | ⬜️ not applicable |
+| CHOICE      | 🟩 supported       | 🟩 supported       | ⬜️ not applicable | ⬜️ not applicable |
+| OPEN_CHOICE | 🟥 not implemented | 🟥 not implemented | 🟥 not implemented | 🟥 not implemented |
+| ATTACHMENT  | 🟥 not implemented | 🟥 not implemented | 🟥 not implemented | 🟥 not implemented |
+| REFERENCE   | 🟥 not implemented | 🟥 not implemented | 🟥 not implemented | 🟥 not implemented |
+| QUANTITY    | 🟥 not implemented | 🟥 not implemented | 🟥 not implemented | 🟥 not implemented |
