@@ -25,7 +25,7 @@
     "prepare": "husky install"
   },
   "peerDependencies": {
-    "@i4mi/fhir_questionnaire": "^0.2.0",
+    "@i4mi/fhir_questionnaire": "^0.2.1",
     "@i4mi/fhir_r4": "^2.1.2",
     "quasar": "^2.11.6",
     "vue": "^3.2.47"
