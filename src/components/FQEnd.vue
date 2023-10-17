@@ -32,7 +32,7 @@ const {translationStrings} = useFQInject();
       <QBtn
         color="primary"
         :disable="disableSave"
-        @click="$emit('save', $q.platform.is.mobile)">
+        @click="$emit('save', $q.platform.is.mobile || false)">
         {{ translationStrings.save }}
       </QBtn>
     </QCardActions>

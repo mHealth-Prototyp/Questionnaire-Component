@@ -81,3 +81,8 @@ There is only a partial support for the question type to render, and also for th
 | ATTACHMENT  | 🟥 not implemented | 🟥 not implemented | 🟥 not implemented | 🟥 not implemented |
 | REFERENCE   | 🟥 not implemented | 🟥 not implemented | 🟥 not implemented | 🟥 not implemented |
 | QUANTITY    | 🟥 not implemented | 🟥 not implemented | 🟥 not implemented | 🟥 not implemented |
+
+
+## License
+
+This software is published under the [MIT License](LICENSE).
